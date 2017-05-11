@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:local="clr-namespace:RailRoadCounter" 
+	x:Class="RailRoadCounter.StartPage">
+
+	<ScrollView>
+	<StackLayout x:Name="ControlWrapper" Padding="20">
+		
+		<Label Text="Станция отправления (наименование)"/>
+		<Entry />
+		
+		<Label Text="Дорога"/>
+		<Entry />
+		
+		<Label Text="Код"/>
+		<Entry />
+		
+
+		<Label Text="Станция назначения (наименование)"/>
+		<Entry />
+		
+		<Label Text="Дорога"/>
+		<Entry />
+		
+		<Label Text="Код"/>
+		<Entry />
+
+		
+		<Label Text="Груз 10-01 (наименование)"/>
+		<Entry />
+		
+		<Label Text="Код"/>
+		<Entry />
+
+		
+		<StackLayout Orientation="Horizontal" Margin="0,10,0,10">
+			<Switch /> 
+			<Label Text="Опасный" VerticalOptions="Center"/>
+		</StackLayout>
+
+		<Label Text="Вес отправки на вагон (тонны)"/>
+		<Entry />
+		
+		<Label Text="Число вагонов"/>
+		<Entry />
+		
+		<Label Text="Число осей"/>
+		<Entry />
+
+		<Label Text="Число охр. вагонов"/>
+		<Entry />
+
+		<Label Text="Число проводников"/>
+		<Entry />
+
+		<Button Text="Расчёт"/>	
+
+	</StackLayout>
+		</ScrollView>
+</ContentPage>

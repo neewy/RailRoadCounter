@@ -2,9 +2,9 @@
 
 namespace RailRoadCounter
 {
-	public partial class RailRoadCounterPage : ContentPage
+	public partial class StartPage : ContentPage
 	{
-		public RailRoadCounterPage()
+		public StartPage()
 		{
 			InitializeComponent();
 		}

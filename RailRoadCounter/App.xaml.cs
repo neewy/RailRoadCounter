@@ -8,7 +8,7 @@ namespace RailRoadCounter
 		{
 			InitializeComponent();
 
-			MainPage = new RailRoadCounterPage();
+			MainPage = new NavigationPage(new StartPage());
 		}
 
 		protected override void OnStart()
