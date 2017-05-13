@@ -8,7 +8,7 @@
 	<StackLayout x:Name="ControlWrapper" Padding="20">
 		
 		<Label Text="Станция отправления (наименование)"/>
-		<Entry />
+		<Entry x:Name="DepStationName" />
 		
 		<Label Text="Дорога"/>
 		<Entry />
@@ -28,7 +28,7 @@
 
 		
 		<Label Text="Груз 10-01 (наименование)"/>
-		<Entry />
+		<Entry x:Name="CargoName"/>
 		
 		<Label Text="Код"/>
 		<Entry />
