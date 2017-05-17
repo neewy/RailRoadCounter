@@ -4,6 +4,9 @@ namespace RailRoadCounter
 {
 	public partial class App : Application
 	{
+
+		public static RequestData Request = new RequestData();
+
 		public App()
 		{
 			InitializeComponent();

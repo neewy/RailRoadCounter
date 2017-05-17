@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	xmlns:local="clr-namespace:RailRoadCounter" 
+	xmlns:local="clr-namespace:RailRoadCounter"
+	xmlns:common="clr-namespace:RailRoadCounter;assembly=RailRoadCounter"
 	x:Class="RailRoadCounter.StartPage">
 
 	<ScrollView>
 	<StackLayout x:Name="ControlWrapper" Padding="20">
 		
 		<Label Text="Станция отправления (наименование)"/>
-		<Entry x:Name="DepStationName" />
+		<Entry x:Name="DepStationName" Text="{Binding DepartureStation.Name}" />
 		
 		<Label Text="Дорога"/>
-		<Entry />
+		<Entry Text="{Binding DepartureStation.RoadName}"/>
 		
 		<Label Text="Код"/>
-		<Entry />
+		<Entry Text="{Binding DepartureStation.Code}"/>
 		
 
 		<Label Text="Станция назначения (наименование)"/>

@@ -1,18 +1,29 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 namespace RailRoadCounter
 {
-	public static class RequestData
+	public class RequestData : INotifyPropertyChanged
 	{
-		public static Station DepartureStation { get; set; }
-		public static Station ArrivalStation { get; set; }
 
-		public static Cargo Cargo { get; set; }
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void OnPropertyChanged([CallerMemberName] string name = "")
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
-		public static double DepartureWeight { get; set; }
-		public static int NumOfWagons { get; set; }
-		public static int NumOfAxis { get; set; }
-		public static int NumOfGuardedWagons { get; set; } 
-		public static int NumOfConductors { get; set; }
+		private Station _departureStation;
+		public Station DepartureStation { get { return _departureStation; } set { _departureStation = value; OnPropertyChanged("DepartureStation"); } }
+		public Station ArrivalStation { get; set; }
+
+		public Cargo Cargo { get; set; }
+
+		public double DepartureWeight { get; set; }
+		public int NumOfWagons { get; set; }
+		public int NumOfAxis { get; set; }
+		public int NumOfGuardedWagons { get; set; }
+		public int NumOfConductors { get; set; }
 
 	}
 }

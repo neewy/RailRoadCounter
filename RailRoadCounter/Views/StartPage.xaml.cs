@@ -8,7 +8,7 @@ namespace RailRoadCounter
 		{
 			InitializeComponent();
 			InitHandlers();
-
+			BindingContext = App.Request;
 		}
 
 		public void InitHandlers() 

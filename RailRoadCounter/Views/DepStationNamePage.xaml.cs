@@ -36,6 +36,7 @@ namespace RailRoadCounter
 
 			StationNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) => {
 				SelectedStation = (Station) e.SelectedItem;
+				App.Request.DepartureStation = SelectedStation;
 			};
 
 			Search.TextChanged += async (sender, e) =>
