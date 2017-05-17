@@ -14,10 +14,12 @@ namespace RailRoadCounter
 		}
 
 		private Station _departureStation;
-		public Station DepartureStation { get { return _departureStation; } set { _departureStation = value; OnPropertyChanged("DepartureStation"); } }
-		public Station ArrivalStation { get; set; }
+		private Station _arrivalStation;
 
-		public Cargo Cargo { get; set; }
+        public Station DepartureStation { get { return _departureStation; } set { _departureStation = value; OnPropertyChanged("DepartureStation"); } }
+		public Station ArrivalStation { get { return _arrivalStation; } set { _arrivalStation = value; OnPropertyChanged("ArrivalStation"); } }
+
+        public Cargo Cargo { get; set; }
 
 		public double DepartureWeight { get; set; }
 		public int NumOfWagons { get; set; }
