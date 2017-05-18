@@ -37,7 +37,12 @@ namespace RailRoadCounter
 			CargoNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
 			{
 				SelectedCargo = (Cargo)e.SelectedItem;
-			};
+
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Navigation.PopModalAsync();
+                });
+            };
 
 			Search.TextChanged += async (sender, e) =>
 			{

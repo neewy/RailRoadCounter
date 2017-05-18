@@ -3,25 +3,28 @@ using System.Xml.Serialization;
 
 namespace RailRoadCounter
 {
-	public class Cargo
-	{
-		[XmlElement("code")]
-		public int Code { get; set; }
+    public class Cargo
+    {
+        [XmlElement("code")]
+        public int Code { get; set; }
 
-		[XmlElement("opas")]
-		public int IsDangerous { get; set; }
+        [XmlElement("ohr")]
+        public string Guarded
+        { get; set; }
 
-		[XmlElement("ohr")]
-		public int IsGuarded { get; set; }
+        [XmlElement("name")]
+        public string Name { get; set; }
 
-		[XmlElement("name")]
-		public string Name { get; set; }
-	}
+        [XmlElement("opas")]
+        public string Dangerous
+        { get; set; }
 
-	[XmlRoot("xml")]
-	public class CargoXml 
-	{
-		[XmlElement("GRUZ")]
-		public Cargo[] CargoList { get; set; }
-	}
+    }
+
+    [XmlRoot("xml")]
+    public class CargoXml
+    {
+        [XmlElement("GRUZ")]
+        public Cargo[] CargoList { get; set; }
+    }
 }

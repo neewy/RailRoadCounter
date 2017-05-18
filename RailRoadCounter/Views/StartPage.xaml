@@ -12,7 +12,8 @@
             <Entry x:Name="DepStationName" Text="{Binding DepartureStation.Name}" />
 
             <Label Text="Дорога"/>
-            <Entry Text="{Binding DepartureStation.RoadName}"/>
+            <Entry Text="{Binding DepartureStation.RoadName}"
+                   IsEnabled="False"/>
 
             <Label Text="Код"/>
             <Entry x:Name="DepStationCode" Text="{Binding DepartureStation.Code}" />
@@ -22,40 +23,41 @@
             <Entry x:Name="ArrStationName" Text="{Binding ArrivalStation.Name}"/>
 
             <Label Text="Дорога"/>
-            <Entry Text="{Binding ArrivalStation.RoadName}" />
+            <Entry Text="{Binding ArrivalStation.RoadName}" 
+                   IsEnabled="False"/>
 
             <Label Text="Код"/>
             <Entry x:Name="ArrStationCode"  Text="{Binding ArrivalStation.Code}" />
 
 
             <Label Text="Груз 10-01 (наименование)"/>
-            <Entry x:Name="CargoName"/>
+            <Entry x:Name="CargoName" Text="{Binding Cargo.Name}" />
 
             <Label Text="Код"/>
-            <Entry />
+            <Entry x:Name="CargoCode" Text="{Binding Cargo.Code}"  />
 
 
             <StackLayout Orientation="Horizontal" Margin="0,10,0,10">
-                <Switch />
+                <Switch IsToggled="{Binding IsDangerous}"  />
                 <Label Text="Опасный" VerticalOptions="Center"/>
             </StackLayout>
 
             <Label Text="Вес отправки на вагон (тонны)"/>
-            <Entry />
+            <Entry Keyboard="Numeric" Text="{Binding DepartureWeight}"/>
 
             <Label Text="Число вагонов"/>
-            <Entry />
+            <Entry Keyboard="Numeric" Text="{Binding NumOfWagons}"/>
 
             <Label Text="Число осей"/>
-            <Entry />
+            <Entry  Keyboard="Numeric" Text="{Binding NumOfAxis}"/>
 
             <Label Text="Число охр. вагонов"/>
-            <Entry />
+            <Entry Keyboard="Numeric" Text="{Binding NumOfGuardedWagons}"/>
 
             <Label Text="Число проводников"/>
-            <Entry />
+            <Entry Keyboard="Numeric" Text="{Binding NumOfConductors}"/>
 
-            <Button Text="Расчёт"/>
+            <Button  x:Name="Calculate" Text="Расчёт"/>
 
         </StackLayout>
     </ScrollView>
