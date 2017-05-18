@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using System.Xml.Serialization;
 using RailRoadCounter.Models;
+using RailRoadCounter.Views;
 
 namespace RailRoadCounter
 {
@@ -80,8 +81,8 @@ namespace RailRoadCounter
                 {
                     var xmlResponse = await response.Content.ReadAsStreamAsync();
                     var responseSerializer = new XmlSerializer(typeof(Response));
-
                     var responseXML = (Response)responseSerializer.Deserialize(xmlResponse);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new CalculationResultPage(responseXML.TarResponse.ResponseData)));
                 }
 
             };

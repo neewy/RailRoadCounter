@@ -20,35 +20,36 @@ namespace RailRoadCounter.Models
     public class ResponseData
     {
         [XmlElement("itogt")]
-        public String itogt
+        public String TonVAT
         { get; set; }
 
         [XmlElement("itogvag")]
-        public String itogvag
+        public String WagonVAT
         { get; set; }
 
         [XmlElement("rst")]
-        public String rst { get; set; }
+        public String Distance { get; set; }
 
         [XmlElement("sectnam")]
-        public String country { get; set; }
+        public String Country { get; set; }
 
         [XmlElement("skidvag")]
-        public String skidvag { get; set; }
+        public String DiscountForWagon{ get; set; }
 
         [XmlElement("srokd")]
-        public String srokd { get; set; }
+        public String DeliveryTime
+        { get; set; }
 
         [XmlElement("sumohr")]
-        public String sumohr { get; set; }
+        public String Security { get; set; }
 
         [XmlElement("sumprov")]
-        public String sumprov { get; set; }
+        public String Conductors { get; set; }
 
         [XmlElement("sumt")]
-        public String sumt { get; set; }
+        public String AmountForTon { get; set; }
 
         [XmlElement("sumvag")]
-        public String sumvag { get; set; }
+        public String AmountForWagon { get; set; }
     }
 }

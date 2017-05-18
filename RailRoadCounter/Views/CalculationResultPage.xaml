@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RailRoadCounter.Views.CalculationResultPage">
+    <ContentPage.Content>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1" />
+            </Grid.ColumnDefinitions>
+
+            <BoxView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Страна" Grid.ColumnSpan="2" TextColor="Red" Grid.Row="1" Grid.Column="1"  VerticalTextAlignment="Center"/>
+            <Label Text="{Binding Country}"  Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="4" VerticalTextAlignment="Center"/>
+
+            <BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Расстояние" TextColor="Red" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="1" VerticalTextAlignment="Center" />
+            <Label Text="{Binding Distance}"  Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="4" VerticalTextAlignment="Center"/>
+
+            <BoxView Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Срок доставки" TextColor="Red" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1"  VerticalTextAlignment="Center"/>
+            <Label Text="{Binding DeliveryTime}" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="4" VerticalTextAlignment="Center"/>
+
+            <BoxView Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Сумма" Grid.ColumnSpan="2" TextColor="Red" Grid.Row="7" Grid.Column="1" VerticalTextAlignment="Center"/>
+            <Label Text="За вагон"  Grid.Row="7" TextColor="Red" Grid.Column="4" VerticalTextAlignment="Center"/>
+            <Label Text="За тонну"  Grid.Row="7" TextColor="Red" Grid.Column="6" VerticalTextAlignment="Center"/>
+
+            <BoxView Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Сумма" Grid.ColumnSpan="2" TextColor="Red" Grid.Row="9" Grid.Column="1"  VerticalTextAlignment="Center"/>
+            <Label Text="{Binding AmountForWagon}"  Grid.Row="9" Grid.Column="4" />
+            <Label Text="{Binding AmountForTon}"  Grid.Row="9" Grid.Column="6" VerticalTextAlignment="Center"/>
+
+            <BoxView Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Скидка за вагон" TextColor="Red" Grid.ColumnSpan="2" Grid.Row="11" Grid.Column="1"  VerticalTextAlignment="Center"/>
+            <Label Text="{Binding DiscountForWagon}" Grid.Row="11" Grid.Column="4" VerticalTextAlignment="Center"/>
+
+            <BoxView Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Проводники" TextColor="Red" Grid.ColumnSpan="2" Grid.Row="13" Grid.Column="1"  VerticalTextAlignment="Center"/>
+            <Label Text="{Binding Conductors}"  Grid.Row="13" Grid.Column="4" VerticalTextAlignment="Center"/>
+
+            <BoxView Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Охрана" TextColor="Red" Grid.ColumnSpan="2" Grid.Row="15" Grid.Column="1"  VerticalTextAlignment="Center"/>
+            <Label Text="{Binding Security}"  Grid.Row="15" Grid.Column="4" VerticalTextAlignment="Center"/>
+
+            <BoxView Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Label Text="Сумма с НДС" TextColor="Red" Grid.ColumnSpan="2" Grid.Row="17" Grid.Column="1"  VerticalTextAlignment="Center"/>
+            <Label Text="{Binding WagonVAT}"  Grid.Row="17" Grid.Column="4" VerticalTextAlignment="Center"/>
+            <Label Text="{Binding TonVAT}"  Grid.Row="17" Grid.Column="6" VerticalTextAlignment="Center"/>
+            <BoxView Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+
+
+            <BoxView Grid.Column="0" Grid.Row="0" Grid.RowSpan="19"  BackgroundColor="Red" WidthRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="End"/>
+            <BoxView Grid.Column="3" Grid.Row="0" Grid.RowSpan="19"  BackgroundColor="Red" WidthRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="End"/>
+            <BoxView Grid.Column="5" Grid.Row="6" Grid.RowSpan="13"  BackgroundColor="Red" WidthRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="End"/>
+            <BoxView Grid.Column="7" Grid.Row="0" Grid.RowSpan="19"  BackgroundColor="Red" WidthRequest="1" VerticalOptions="FillAndExpand" HorizontalOptions="End"/>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>
