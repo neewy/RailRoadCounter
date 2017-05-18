@@ -9,8 +9,7 @@ namespace RailRoadCounter
 	public partial class CargoNamePage : ContentPage
 	{
 		public ObservableCollection<Cargo> CargoList = new ObservableCollection<Cargo>();
-		public Cargo SelectedCargo { get; set; }
-
+		
 		public CargoNamePage()
 		{
 			InitializeComponent();
@@ -36,8 +35,7 @@ namespace RailRoadCounter
 
 			CargoNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
 			{
-				SelectedCargo = (Cargo)e.SelectedItem;
-
+				App.Request.Cargo = (Cargo)e.SelectedItem;
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await Navigation.PopModalAsync();

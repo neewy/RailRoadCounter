@@ -40,7 +40,7 @@
 
             <ListView IsVisible="false" x:Name="CargoNamesList"
 					RowHeight="100"
-					ItemsSource="{Binding Cargo}"
+					ItemsSource="{Binding CargoList}"
 					RelativeLayout.WidthConstraint =
       				"{ConstraintExpression Type=RelativeToParent,
                              Property=Width,
