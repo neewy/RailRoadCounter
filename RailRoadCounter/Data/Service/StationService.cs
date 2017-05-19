@@ -9,7 +9,7 @@ namespace RailRoadCounter
 	public class StationService : IService<Station>
 	{
 
-		private readonly IRepository<Station> _stationRepository;
+		private readonly Repository<Station> _stationRepository;
 
 		public StationService(SQLiteAsyncConnection db)
 		{
@@ -27,6 +27,12 @@ namespace RailRoadCounter
 
 		public async Task<List<Station>> FindAll()
 		=> await _stationRepository.Get<Station>();
+
+		public async Task<List<Station>> FindByName(string name)
+			=> await _stationRepository.GetByQuery($"SELECT * FROM Station WHERE Name like '{name}%';");
+
+		public async Task<List<Station>> FindByCode(string code)
+			=> await _stationRepository.GetByQuery($"SELECT * FROM Cargo WHERE Code like '{code}%';");
 
 		public async Task<int> Save(Station item)
 		{

@@ -9,13 +9,15 @@ namespace RailRoadCounter
 	public partial class CargoNamePage : ContentPage
 	{
 		public ObservableCollection<Cargo> CargoList = new ObservableCollection<Cargo>();
-		
+		private CargoService _cargoService;
+
 		public CargoNamePage()
 		{
 			InitializeComponent();
 
 			String icon = "IconCheck.png";
 			BindingContext = this;
+			_cargoService = new CargoService(App.Database.sqlite);
 
 			CargoNamesList.ItemsSource = CargoList;
 
@@ -36,11 +38,11 @@ namespace RailRoadCounter
 			CargoNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
 			{
 				App.Request.Cargo = (Cargo)e.SelectedItem;
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Navigation.PopModalAsync();
-                });
-            };
+				Device.BeginInvokeOnMainThread(async () =>
+				{
+					await Navigation.PopModalAsync();
+				});
+			};
 
 			Search.TextChanged += async (sender, e) =>
 			{
@@ -48,25 +50,13 @@ namespace RailRoadCounter
 				{
 					Loader.IsVisible = true;
 
-					var request = HttpConnector.CreateGetConnection(new Uri($"http://tarifgd.ru/tar_online2/getgruz.php?buk={e.NewTextValue}&poiskvh=1&view=xml"));
+					var databaseCargo = await _cargoService.FindByName(e.NewTextValue.ToUpper());
 
-					var response = await HttpConnector.Client.SendAsync(request);
-					if (response.IsSuccessStatusCode)
+					CargoList.Clear();
+
+					foreach (var cargo in databaseCargo)
 					{
-
-						var xmlResponse = await response.Content.ReadAsStreamAsync();
-						var cargoSerializer = new XmlSerializer(typeof(CargoXml));
-
-						var cargoXml = (CargoXml) cargoSerializer.Deserialize(xmlResponse);
-
-						CargoList.Clear();
-						if (cargoXml.CargoList != null)
-						{
-							foreach (var cargo in cargoXml.CargoList)
-							{
-								CargoList.Add(cargo);
-							}
-						}
+						CargoList.Add(cargo);
 					}
 
 					Loader.IsVisible = false;

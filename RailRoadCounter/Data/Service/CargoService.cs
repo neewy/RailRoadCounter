@@ -9,7 +9,7 @@ namespace RailRoadCounter
 	public class CargoService : IService<Cargo>
 	{
 
-		private readonly IRepository<Cargo> _cargoRepository;
+		private readonly Repository<Cargo> _cargoRepository;
 
 		public CargoService(SQLiteAsyncConnection db)
 		{
@@ -22,11 +22,18 @@ namespace RailRoadCounter
 		public async Task DeleteAll()
 			=> await _cargoRepository.DeleteAll();
 
-		public Task<List<Cargo>> Find(Expression<Func<Cargo, bool>> predicate)
-			=> _cargoRepository.Get<Cargo>(predicate);
+		public async Task<List<Cargo>> Find(Expression<Func<Cargo, bool>> predicate)
+			=> await _cargoRepository.Get<Cargo>(predicate);
 
-		public Task<List<Cargo>> FindAll()
-			=> _cargoRepository.Get<Cargo>();
+		public async Task<List<Cargo>> FindAll()
+			=> await _cargoRepository.Get<Cargo>();
+
+		public async Task<List<Cargo>> FindByName(string name)
+			=> await _cargoRepository.GetByQuery($"SELECT * FROM Cargo WHERE Name like '{name}%';");
+
+		public async Task<List<Cargo>> FindByCode(string code)
+			=> await _cargoRepository.GetByQuery($"SELECT * FROM Cargo WHERE Code like '{code}%';");
+
 
 		public async Task<int> Save(Cargo item)
 		{

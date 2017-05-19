@@ -7,93 +7,83 @@ using Xamarin.Forms;
 
 namespace RailRoadCounter
 {
-    public partial class 
-        StationCodePage : ContentPage
-    {
-        public ObservableCollection<Station> Stations = new ObservableCollection<Station>();
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            Search.Focus(); //select when apprears
-        }
-        public StationCodePage()
-        {
-            InitializeComponent();
+	public partial class StationCodePage : ContentPage
+	{
+		public ObservableCollection<Station> Stations = new ObservableCollection<Station>();
+		private StationService _stationService;
 
-            String icon = "IconCheck.png";
-            BindingContext = this;
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			Search.Focus(); //select when apprears
+		}
+		public StationCodePage()
+		{
+			InitializeComponent();
 
-            StationNamesList.ItemsSource = Stations;
+			String icon = "IconCheck.png";
+			BindingContext = this;
+			_stationService = new StationService(App.Database.sqlite);
 
-            ToolbarItems.Add(new ToolbarItem
-            {
-                Icon = icon,
-                Command = new Command(() =>
-                {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        await Navigation.PopModalAsync();
-                    });
+			StationNamesList.ItemsSource = Stations;
 
-                }),
-            });
+			ToolbarItems.Add(new ToolbarItem
+			{
+				Icon = icon,
+				Command = new Command(() =>
+				{
+					Device.BeginInvokeOnMainThread(async () =>
+					{
+						await Navigation.PopModalAsync();
+					});
 
-            StationNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
-            {
-                if (StartPage.IsDeparture)
-                {
-                    App.Request.DepartureStation = (Station)e.SelectedItem;
-                }
-                else
-                {
-                    App.Request.ArrivalStation = (Station)e.SelectedItem;
-                }
-                
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Navigation.PopModalAsync();
-                });
-            };
+				}),
+			});
 
-            Search.TextChanged += async (sender, e) =>
-            {
-                if (e.NewTextValue.Length != 0)
-                {
-                    Loader.IsVisible = true;
+			StationNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
+			{
+				if (StartPage.IsDeparture)
+				{
+					App.Request.DepartureStation = (Station)e.SelectedItem;
+				}
+				else
+				{
+					App.Request.ArrivalStation = (Station)e.SelectedItem;
+				}
 
-                    var request = HttpConnector.CreateGetConnection(new Uri($"http://tarifgd.ru/tar_online2/getstan.php?cod={e.NewTextValue}&poiskvh=1&pp=*&view=xml"));
+				Device.BeginInvokeOnMainThread(async () =>
+				{
+					await Navigation.PopModalAsync();
+				});
+			};
 
-                    var response = await HttpConnector.Client.SendAsync(request);
-                    if (response.IsSuccessStatusCode)
-                    {
+			Search.TextChanged += async (sender, e) =>
+			{
+				if (e.NewTextValue.Length != 0)
+				{
+					Loader.IsVisible = true;
 
-                        var xmlResponse = await response.Content.ReadAsStreamAsync();
-                        var stationSerializer = new XmlSerializer(typeof(StationXml));
+					var databaseStations = await _stationService.FindByCode(e.NewTextValue);
 
-                        var stationsXml = (StationXml)stationSerializer.Deserialize(xmlResponse);
+					Stations.Clear();
 
-                        Stations.Clear();
-                        if (stationsXml.Stations != null)
-                        {
-                            foreach (var station in stationsXml.Stations)
-                            {
-                                Stations.Add(station);
-                            }
-                        }
-                    }
+					foreach (var cargo in databaseStations)
+					{
+						Stations.Add(cargo);
+					}
 
-                    Loader.IsVisible = false;
-                    StationNamesList.IsVisible = Stations.Count != 0;
-                }
-                else
-                {
-                    StationNamesList.IsVisible = false;
-                }
-            };
+					Loader.IsVisible = false;
+					StationNamesList.IsVisible = Stations.Count != 0;
+				}
+				else
+				{
+					StationNamesList.IsVisible = false;
+				}
+			};
 
 
-        }
-    }
+		}
+	}
 
 }
 

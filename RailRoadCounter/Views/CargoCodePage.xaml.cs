@@ -6,78 +6,67 @@ using Xamarin.Forms;
 
 namespace RailRoadCounter
 {
-    public partial class CargoCodePage : ContentPage
-    {
-        public ObservableCollection<Cargo> CargoList = new ObservableCollection<Cargo>();
-        public Cargo SelectedCargo { get; set; }
+	public partial class CargoCodePage : ContentPage
+	{
+		public ObservableCollection<Cargo> CargoList = new ObservableCollection<Cargo>();
+		private CargoService _cargoService;
 
-        public CargoCodePage()
-        {
-            InitializeComponent();
+		public CargoCodePage()
+		{
+			InitializeComponent();
 
-            String icon = "IconCheck.png";
-            BindingContext = this;
+			String icon = "IconCheck.png";
+			BindingContext = this;
+			_cargoService = new CargoService(App.Database.sqlite);
 
-            CargoNamesList.ItemsSource = CargoList;
+			CargoNamesList.ItemsSource = CargoList;
 
 
-            ToolbarItems.Add(new ToolbarItem
-            {
-                Icon = icon,
-                Command = new Command(() =>
-                {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        await Navigation.PopModalAsync();
-                    });
+			ToolbarItems.Add(new ToolbarItem
+			{
+				Icon = icon,
+				Command = new Command(() =>
+				{
+					Device.BeginInvokeOnMainThread(async () =>
+					{
+						await Navigation.PopModalAsync();
+					});
 
-                }),
-            });
+				}),
+			});
 
-            CargoNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
-            {
-                App.Request.Cargo = (Cargo)e.SelectedItem;
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await Navigation.PopModalAsync();
-                });
-            };
+			CargoNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
+			{
+				App.Request.Cargo = (Cargo)e.SelectedItem;
+				Device.BeginInvokeOnMainThread(async () =>
+				{
+					await Navigation.PopModalAsync();
+				});
+			};
 
-            Search.TextChanged += async (sender, e) =>
-            {
-                if (e.NewTextValue.Length != 0)
-                {
-                    Loader.IsVisible = true;
+			Search.TextChanged += async (sender, e) =>
+			{
+				if (e.NewTextValue.Length != 0)
+				{
+					Loader.IsVisible = true;
 
-                    var request = HttpConnector.CreateGetConnection(new Uri($"http://tarifgd.ru/tar_online2/getgruz.php?cod={e.NewTextValue}&poiskvh=1&view=xml"));
+					var databaseCargo = await _cargoService.FindByCode(e.NewTextValue.ToUpper());
 
-                    var response = await HttpConnector.Client.SendAsync(request);
-                    if (response.IsSuccessStatusCode)
-                    {
+					CargoList.Clear();
 
-                        var xmlResponse = await response.Content.ReadAsStreamAsync();
-                        var cargoSerializer = new XmlSerializer(typeof(CargoXml));
+					foreach (var cargo in databaseCargo)
+					{
+						CargoList.Add(cargo);
+					}
 
-                        var cargoXml = (CargoXml)cargoSerializer.Deserialize(xmlResponse);
-
-                        CargoList.Clear();
-                        if (cargoXml.CargoList != null)
-                        {
-                            foreach (var cargo in cargoXml.CargoList)
-                            {
-                                CargoList.Add(cargo);
-                            }
-                        }
-                    }
-
-                    Loader.IsVisible = false;
-                    CargoNamesList.IsVisible = CargoList.Count != 0;
-                }
-                else
-                {
-                    CargoNamesList.IsVisible = false;
-                }
-            };
-        }
-    }
+					Loader.IsVisible = false;
+					CargoNamesList.IsVisible = CargoList.Count != 0;
+				}
+				else
+				{
+					CargoNamesList.IsVisible = false;
+				}
+			};
+		}
+	}
 }

@@ -47,6 +47,10 @@ namespace RailRoadCounter
 			return await query.ToListAsync();
 		}
 
+		public async Task<List<T>> GetByQuery(string sql) {
+			return await db.QueryAsync<T>(sql, new object[1]);
+		}
+
 		public async Task<T> Get(int id) =>
 			 await db.FindAsync<T>(id);
 
