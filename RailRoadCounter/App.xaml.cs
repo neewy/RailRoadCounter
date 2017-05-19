@@ -1,9 +1,33 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
+using PCLStorage;
+using Xamarin.Forms;
 
 namespace RailRoadCounter
 {
 	public partial class App : Application
 	{
+
+		private static Database _database;
+		public static Database Database
+		{
+			get
+			{
+				if (_database == null || _database.sqlite == null)
+				{
+					_database = new Database(DependencyService.Get<IFileHelper>().GetLocalFilePath("Railroad.db3"));
+				}
+				return _database;
+			}
+
+			set
+			{
+				_database = value;
+			}
+		}
 
 		public static RequestData Request = new RequestData();
 
@@ -16,7 +40,9 @@ namespace RailRoadCounter
 
 		protected override void OnStart()
 		{
-			// Handle when your app starts
+			if (!Application.Current.Properties.ContainsKey("firstRun")){
+				MainPage.Navigation.PushModalAsync(new CachingPage());
+			}
 		}
 
 		protected override void OnSleep()
