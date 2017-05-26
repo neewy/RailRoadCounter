@@ -3,7 +3,8 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	xmlns:local="clr-namespace:RailRoadCounter"
 	xmlns:common="clr-namespace:RailRoadCounter;assembly=RailRoadCounter"
-	x:Class="RailRoadCounter.StartPage">
+	x:Class="RailRoadCounter.StartPage" 
+	Title="Форма расчёта">
 
     <ScrollView>
         <StackLayout x:Name="ControlWrapper" Padding="20">

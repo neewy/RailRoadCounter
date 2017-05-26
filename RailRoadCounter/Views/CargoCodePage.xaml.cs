@@ -50,7 +50,17 @@ namespace RailRoadCounter
 				{
 					Loader.IsVisible = true;
 
-					var databaseCargo = await _cargoService.FindByCode(e.NewTextValue.ToUpper());
+					var databaseCargo = await _cargoService.FindByCode(e.NewTextValue);
+
+					if (databaseCargo.Count == 0)
+					{
+						if (!DownloadCheker.IsCargoDownloadedByCode(e.NewTextValue))
+						{
+							DataRetrievalHelper dataHelper = new DataRetrievalHelper();
+							await dataHelper.GetAndSaveCargoByCode(e.NewTextValue[0]);
+							databaseCargo = await _cargoService.FindByCode(e.NewTextValue);
+						}
+					}
 
 					CargoList.Clear();
 

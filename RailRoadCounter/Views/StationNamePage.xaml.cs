@@ -18,6 +18,14 @@ namespace RailRoadCounter
 
 			String icon = "IconCheck.png";
 			BindingContext = this;
+			if (StartPage.IsDeparture)
+			{
+				Title = "Выбор станции отправления";
+			}
+			else
+			{
+				Title = "Выбор станции назначения";
+			}
 			_stationService = new StationService(App.Database.sqlite);
 
 			StationNamesList.ItemsSource = Stations;
@@ -57,6 +65,12 @@ namespace RailRoadCounter
 				if (e.NewTextValue.Length != 0)
 				{
 					Loader.IsVisible = true;
+
+					if (!DownloadCheker.IsStationDownloadedByName(e.NewTextValue))
+					{
+						DataRetrievalHelper dataHelper = new DataRetrievalHelper();
+						await dataHelper.GetAndSaveStationsByName(e.NewTextValue[0]);
+					}
 
 					var databaseStations = await _stationService.FindByName(e.NewTextValue.ToUpper());
 

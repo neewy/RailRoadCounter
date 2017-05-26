@@ -40,9 +40,13 @@ namespace RailRoadCounter
 
 		protected override void OnStart()
 		{
-			if (!Application.Current.Properties.ContainsKey("firstRun")){
-				MainPage.Navigation.PushModalAsync(new CachingPage());
+			if (!Application.Current.Properties.ContainsKey("firstRun"))
+			{
+				App.Database.CreateInitialDatabase().ConfigureAwait(false);
+				Application.Current.Properties.Add("firstRun", 1);
+				Application.Current.SavePropertiesAsync().ConfigureAwait(false);
 			}
+
 		}
 
 		protected override void OnSleep()

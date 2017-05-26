@@ -1,13 +1,15 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	x:Class="RailRoadCounter.StationCodePage">
+	x:Class="RailRoadCounter.StationCodePage"
+	>
     <ContentPage.Content>
 
         <RelativeLayout>
             <Entry
                 Keyboard="Numeric"
 				x:Name="Search"
+				Margin="10"
                 RelativeLayout.WidthConstraint =
       			"{ConstraintExpression Type=RelativeToParent,
                              Property=Width,
@@ -39,7 +41,8 @@
                              Constant=1}"/>
 
             <ListView IsVisible="false" x:Name="StationNamesList"
-					RowHeight="100"
+					HasUnevenRows ="true"
+					RowHeight = "-1"
 					ItemsSource="{Binding Stations}"
 					RelativeLayout.WidthConstraint =
       				"{ConstraintExpression Type=RelativeToParent,
@@ -63,7 +66,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Spacing="10">
+                            <StackLayout Padding="10" Spacing="10">
                                 <Label Text="{Binding Name}"/>
                                 <Label Text="{Binding Code}"/>
                                 <Label Text="{Binding RoadName}"/>

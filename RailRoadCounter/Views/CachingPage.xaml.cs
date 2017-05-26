@@ -15,8 +15,7 @@ namespace RailRoadCounter
 			InitializeComponent();
 			var dbHelper = new DataRetrievalHelper();
 			_disposable = dbHelper.Subscribe(this);
-
-			dbHelper.InitDb().ConfigureAwait(false);
+			dbHelper.GetAndSaveAll().ConfigureAwait(false);
 		}
 
 		public void OnCompleted()

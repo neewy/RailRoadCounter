@@ -38,7 +38,8 @@
                              Constant=1}"/>
 			
 				<ListView IsVisible="false" x:Name="StationNamesList"
-					RowHeight="100"
+					HasUnevenRows ="true"
+					RowHeight = "-1"
 					ItemsSource="{Binding Stations}"
 					RelativeLayout.WidthConstraint =
       				"{ConstraintExpression Type=RelativeToParent,
@@ -62,7 +63,7 @@
 				<ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-							<StackLayout Spacing="10">
+							<StackLayout Padding="10" Spacing="10">
 								<Label Text="{Binding Name}"/>
 								<Label Text="{Binding Code}"/>
 								<Label Text="{Binding RoadName}"/>

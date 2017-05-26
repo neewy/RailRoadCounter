@@ -1,14 +1,16 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="RailRoadCounter.CargoCodePage">
+    x:Class="RailRoadCounter.CargoCodePage"
+	Title="Выбор груза">
     <ContentPage.Content>
 
         <RelativeLayout>
             <Entry
                 Keyboard="Numeric"
 				x:Name="Search"
+				Margin="10"
 				RelativeLayout.WidthConstraint =
       			"{ConstraintExpression Type=RelativeToParent,
                              Property=Width,
@@ -40,7 +42,8 @@
                              Constant=1}"/>
 
             <ListView IsVisible="false" x:Name="CargoNamesList"
-					RowHeight="100"
+					HasUnevenRows ="true"
+					RowHeight = "-1"
 					ItemsSource="{Binding CargoList}"
 					RelativeLayout.WidthConstraint =
       				"{ConstraintExpression Type=RelativeToParent,
@@ -64,27 +67,25 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid Padding="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Text="{Binding Name}" Grid.ColumnSpan="4" Grid.Row="0" Grid.Column="0" />
-                                <Label Text="Охраняемый" Grid.Row="1" Grid.Column="0" />
-                                <Label Text="{Binding Guarded}" Grid.Row="1" Grid.Column="1" />
-                                <Label Text="Опасный" Grid.Row="1" Grid.Column="2" />
-                                <Label Text="{Binding Dangerous}" Grid.Row="1" Grid.Column="3" />
+                                <Label Text="Охраняемый:" Grid.Row="1" Grid.Column="0" />
+                                <Label Text="{Binding IsGuarded}" Grid.Row="1" Grid.Column="1" />
+                                <Label Text="Опасный:" Grid.Row="1" Grid.Column="2" />
+                                <Label Text="{Binding IsDangerous}" Grid.Row="1" Grid.Column="3" />
                                 <Label Text="{Binding Code}" Grid.Row="2" Grid.Column="0" />
                             </Grid>
-
-
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

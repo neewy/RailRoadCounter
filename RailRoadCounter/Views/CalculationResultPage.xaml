@@ -1,7 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RailRoadCounter.Views.CalculationResultPage">
+             x:Class="RailRoadCounter.Views.CalculationResultPage"
+	Title="Результат расчёта">
     <ContentPage.Content>
         <Grid >
             <Grid.RowDefinitions>
@@ -55,7 +56,7 @@
 
             <BoxView Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
             <Label Text="Сумма" Grid.ColumnSpan="2" TextColor="Red" Grid.Row="9" Grid.Column="1"  VerticalTextAlignment="Center"/>
-            <Label Text="{Binding AmountForWagon}"  Grid.Row="9" Grid.Column="4" />
+            <Label Text="{Binding AmountForWagon}"  Grid.Row="9" Grid.Column="4" VerticalTextAlignment="Center" />
             <Label Text="{Binding AmountForTon}"  Grid.Row="9" Grid.Column="6" VerticalTextAlignment="Center"/>
 
             <BoxView Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="8" BackgroundColor="Red" HeightRequest="1" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>

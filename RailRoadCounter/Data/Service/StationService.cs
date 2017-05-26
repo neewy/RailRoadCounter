@@ -32,7 +32,8 @@ namespace RailRoadCounter
 			=> await _stationRepository.GetByQuery($"SELECT * FROM Station WHERE Name like '{name}%';");
 
 		public async Task<List<Station>> FindByCode(string code)
-			=> await _stationRepository.GetByQuery($"SELECT * FROM Cargo WHERE Code like '{code}%';");
+ 			=> await _stationRepository.GetByQuery($"SELECT * FROM Station WHERE Code like '{code}%';");
+
 
 		public async Task<int> Save(Station item)
 		{
