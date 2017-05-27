@@ -142,7 +142,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\Info.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\drawable\LaunchImage.png" />
+    <AndroidResource Include="Resources\drawable\LaunchImage.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\drawable-hdpi\LaunchImage.png" />
