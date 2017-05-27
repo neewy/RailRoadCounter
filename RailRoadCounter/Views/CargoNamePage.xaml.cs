@@ -10,12 +10,12 @@ namespace RailRoadCounter
 	{
 		public ObservableCollection<Cargo> CargoList = new ObservableCollection<Cargo>();
 		private CargoService _cargoService;
-        protected override bool OnBackButtonPressed()
-        {
-            StartPage.IsNavOpened = false;
-            return base.OnBackButtonPressed();
-        }
-        public CargoNamePage()
+		protected override bool OnBackButtonPressed()
+		{
+			StartPage.IsNavOpened = false;
+			return base.OnBackButtonPressed();
+		}
+		public CargoNamePage()
 		{
 			InitializeComponent();
 
@@ -54,13 +54,17 @@ namespace RailRoadCounter
 				{
 					Loader.IsVisible = true;
 
-					if (!DownloadCheker.IsCargoDownloadedByName(e.NewTextValue))
-					{
-						DataRetrievalHelper dataHelper = new DataRetrievalHelper();
-						await dataHelper.GetAndSaveCargoByName(e.NewTextValue[0]);
-					}
-
 					var databaseCargo = await _cargoService.FindByName(e.NewTextValue.ToUpper());
+
+					if (databaseCargo.Count == 0)
+					{
+						if (!DownloadCheker.IsCargoDownloadedByName(e.NewTextValue))
+						{
+							DataRetrievalHelper dataHelper = new DataRetrievalHelper();
+							await dataHelper.GetAndSaveCargoByName(e.NewTextValue[0]);
+							databaseCargo = await _cargoService.FindByName(e.NewTextValue.ToUpper());
+						}
+					}
 
 					CargoList.Clear();
 

@@ -12,17 +12,17 @@ namespace RailRoadCounter
 		public ObservableCollection<Station> Stations = new ObservableCollection<Station>();
 		private StationService _stationService;
 
-        protected override bool OnBackButtonPressed()
-        {
-            StartPage.IsNavOpened = false;
-            return base.OnBackButtonPressed();
-        }
+		protected override bool OnBackButtonPressed()
+		{
+			StartPage.IsNavOpened = false;
+			return base.OnBackButtonPressed();
+		}
 
-        public StationNamePage()
+		public StationNamePage()
 		{
 			InitializeComponent();
-            
-            String icon = "IconCheck.png";
+
+			String icon = "IconCheck.png";
 			BindingContext = this;
 			if (StartPage.IsDeparture)
 			{
@@ -35,7 +35,7 @@ namespace RailRoadCounter
 			_stationService = new StationService(App.Database.sqlite);
 
 			StationNamesList.ItemsSource = Stations;
-            ToolbarItems.Add(new ToolbarItem
+			ToolbarItems.Add(new ToolbarItem
 			{
 				Icon = icon,
 				Command = new Command(() =>
@@ -47,7 +47,7 @@ namespace RailRoadCounter
 
 				}),
 			});
-            StationNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
+			StationNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
 			{
 
 				if (StartPage.IsDeparture)
@@ -70,13 +70,17 @@ namespace RailRoadCounter
 				{
 					Loader.IsVisible = true;
 
-					if (!DownloadCheker.IsStationDownloadedByName(e.NewTextValue))
-					{
-						DataRetrievalHelper dataHelper = new DataRetrievalHelper();
-						await dataHelper.GetAndSaveStationsByName(e.NewTextValue[0]);
-					}
-
 					var databaseStations = await _stationService.FindByName(e.NewTextValue.ToUpper());
+
+					if (databaseStations.Count == 0)
+					{
+						if (!DownloadCheker.IsStationDownloadedByName(e.NewTextValue))
+						{
+							DataRetrievalHelper dataHelper = new DataRetrievalHelper();
+							await dataHelper.GetAndSaveStationsByName(e.NewTextValue[0]);
+							databaseStations = await _stationService.FindByName(e.NewTextValue.ToUpper());
+						}
+					}
 
 					Stations.Clear();
 
@@ -93,8 +97,8 @@ namespace RailRoadCounter
 					StationNamesList.IsVisible = false;
 				}
 			};
-            
-        }
+
+		}
 	}
 }
 

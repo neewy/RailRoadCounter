@@ -46,7 +46,6 @@ namespace RailRoadCounter
 				Application.Current.Properties.Add("firstRun", 1);
 				Application.Current.SavePropertiesAsync().ConfigureAwait(false);
 			}
-
 		}
 
 		protected override void OnSleep()

@@ -9,7 +9,7 @@ namespace RailRoadCounter
 {
 	public struct Message
 	{
-		public double Prgs { get; set; }
+		public int Prgs { get; set; }
 	}
 
 	public class DataRetrievalHelper : IObservable<Message>
@@ -18,8 +18,7 @@ namespace RailRoadCounter
 		private static CargoService _cargoService;
 		private List<IObserver<Message>> _observers;
 
-		private static double ProgressCount { get; set; }
-		private static double Progress { get { return (100.0 / 10567.0) * ProgressCount; } }
+		private static int ProgressCount { get; set; }
 
 		public DataRetrievalHelper()
 		{
@@ -50,7 +49,7 @@ namespace RailRoadCounter
 			{
 				await GetAndSaveStationsByName(c);
 				ProgressCount++;
-				SendMessage((new Message { Prgs = Progress }));
+				SendMessage((new Message { Prgs = ProgressCount }));
 			}
 		}
 
@@ -61,7 +60,7 @@ namespace RailRoadCounter
 			{
 				await GetAndSaveCargoByName(c);
 				ProgressCount++;
-				SendMessage((new Message { Prgs = Progress }));
+				SendMessage((new Message { Prgs = ProgressCount }));
 			}
 		}
 

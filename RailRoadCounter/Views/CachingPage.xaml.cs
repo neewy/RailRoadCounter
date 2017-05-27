@@ -36,7 +36,7 @@ namespace RailRoadCounter
 		{
 			Device.BeginInvokeOnMainThread(() =>
 			{
-				CountMessage.Text = $"Прогресс: {(int)value.Prgs}%";
+				CountMessage.Text = $"Обновлено {(int)value.Prgs} записей";
 			});
 		}
 
