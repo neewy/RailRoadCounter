@@ -10,8 +10,12 @@ namespace RailRoadCounter
 	{
 		public ObservableCollection<Cargo> CargoList = new ObservableCollection<Cargo>();
 		private CargoService _cargoService;
-
-		public CargoCodePage()
+        protected override bool OnBackButtonPressed()
+        {
+            StartPage.IsNavOpened = false;
+            return base.OnBackButtonPressed();
+        }
+        public CargoCodePage()
 		{
 			InitializeComponent();
 

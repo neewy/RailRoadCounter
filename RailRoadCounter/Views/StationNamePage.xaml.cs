@@ -12,11 +12,17 @@ namespace RailRoadCounter
 		public ObservableCollection<Station> Stations = new ObservableCollection<Station>();
 		private StationService _stationService;
 
-		public StationNamePage()
+        protected override bool OnBackButtonPressed()
+        {
+            StartPage.IsNavOpened = false;
+            return base.OnBackButtonPressed();
+        }
+
+        public StationNamePage()
 		{
 			InitializeComponent();
-
-			String icon = "IconCheck.png";
+            
+            String icon = "IconCheck.png";
 			BindingContext = this;
 			if (StartPage.IsDeparture)
 			{
@@ -29,8 +35,7 @@ namespace RailRoadCounter
 			_stationService = new StationService(App.Database.sqlite);
 
 			StationNamesList.ItemsSource = Stations;
-
-			ToolbarItems.Add(new ToolbarItem
+            ToolbarItems.Add(new ToolbarItem
 			{
 				Icon = icon,
 				Command = new Command(() =>
@@ -42,8 +47,7 @@ namespace RailRoadCounter
 
 				}),
 			});
-
-			StationNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
+            StationNamesList.ItemSelected += (object sender, SelectedItemChangedEventArgs e) =>
 			{
 
 				if (StartPage.IsDeparture)
@@ -89,7 +93,8 @@ namespace RailRoadCounter
 					StationNamesList.IsVisible = false;
 				}
 			};
-		}
+            
+        }
 	}
 }
 
